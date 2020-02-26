@@ -17,7 +17,7 @@ ENV GITLAB_ZH_GIT=https://gitlab.com/xhang/gitlab.git
 
 # Reference: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/config/software/gitlab-rails.rb
 RUN set -xe \
-    && echo " # Preparing ..." \
+    && echo " # 准备基础环境 ..." \
     && export DEBIAN_FRONTEND=noninteractive \
     && export SSL_CERT_DIR=/etc/ssl/certs/ \
     && export GIT_SSL_CAPATH=/etc/ssl/certs/ \
@@ -27,17 +27,17 @@ RUN set -xe \
     && apt-get update \
     && export buildDeps='lsb-release patch nodejs python build-essential yarn cmake' \
     && apt-get install -yqq $buildDeps \
-    && echo " # Generating translation patch ..." \
+    && echo " # 生成翻译补丁 ..." \
     && cd /tmp \
     && git clone ${GITLAB_ZH_GIT} gitlab \
     && cd gitlab \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/javascripts/locale' \
     && git diff v12.3.5..v12.3.5-zh -- .  ${IGNORE_DIRS} > ../zh_CN.diff \
-    && echo " # Patching ..." \
+    && echo " # 打补丁中 ..." \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
-    && echo " # Copy locale files ..." \
+    && echo " # 拷贝本地文件 ..." \
     && cp -R locale ${GITLAB_DIR}/ \
-    && echo " # Regenerating the assets" \
+    && echo " # 重新生成资源" \
     && cd ${GITLAB_DIR} \
     && cp config/gitlab.yml.example config/gitlab.yml \
     && cp config/database.yml.postgresql config/database.yml \
@@ -55,7 +55,7 @@ RUN set -xe \
     && export NO_PRIVILEGE_DROP=true \
     && bundle exec rake gettext:compile \
     && bundle exec rake gitlab:assets:compile \
-    && echo " # Cleaning ..." \
+    && echo " # 清理资源和缓存 ..." \
     && yarn cache clean \
     && rm -rf log \
         tmp \
