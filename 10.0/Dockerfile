@@ -38,6 +38,8 @@ RUN set -xe \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/javascripts/locale' \
     && git diff v12.3.5..v12.3.5-zh -- .  ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # 打补丁中 ..." \
+    && ls ../ \ 
+    && pwd \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
     && echo " # 拷贝本地文件 ..." \
     && cp -R locale ${GITLAB_DIR}/ \
