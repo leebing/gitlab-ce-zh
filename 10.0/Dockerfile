@@ -31,6 +31,10 @@ RUN set -xe \
     && cd /tmp \
     && git clone ${GITLAB_ZH_GIT} gitlab \
     && cd gitlab \
+	&& ls \
+	&& echo "以上是gitlab下载后的目录地址"
+	&& echo "GITLAB_DIR地址:" \
+	%% ls $GITLAB_DIR} \
     && export IGNORE_DIRS=':!spec :!features :!.gitignore :!locale :!app/assets/javascripts/locale' \
     && git diff v12.3.5..v12.3.5-zh -- .  ${IGNORE_DIRS} > ../zh_CN.diff \
     && echo " # 打补丁中 ..." \
