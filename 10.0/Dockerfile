@@ -41,7 +41,7 @@ RUN set -xe \
     && ls ../ \ 
     && pwd \
     && patch -d ${GITLAB_DIR} -p1 < ../zh_CN.diff \
-    && echo " # 拷贝本地文件 ..." \
+    && echo " # 拷贝本地文件  ..." \
     && cp -R locale ${GITLAB_DIR}/ \
     && echo " # 重新生成资源" \
     && cd ${GITLAB_DIR} \
