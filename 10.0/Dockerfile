@@ -17,7 +17,7 @@ ENV GITLAB_ZH_GIT=https://gitlab.com/xhang/gitlab.git
 
 # Reference: https://gitlab.com/gitlab-org/omnibus-gitlab/blob/master/config/software/gitlab-rails.rb
 RUN set -xe \
-    && echo " # 准备基础环境 ..." \
+    && echo " # 准备基础环境  ..." \
     && export DEBIAN_FRONTEND=noninteractive \
     && export SSL_CERT_DIR=/etc/ssl/certs/ \
     && export GIT_SSL_CAPATH=/etc/ssl/certs/ \
